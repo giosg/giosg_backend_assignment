@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+		<title>Giosg Backend Coding Assignment</title>
 
 		<link rel="stylesheet" href="css/reset.css">
 		<link rel="stylesheet" href="css/reveal.css">
@@ -12,6 +12,16 @@
 
 		<!-- Theme used for syntax highlighting of code -->
 		<link rel="stylesheet" href="lib/css/monokai.css">
+
+		<style>
+			/* Add partymode logo to top corner */
+			body {
+				background-image: url(./img/giosg-partymode.webp);
+				background-size: 10%;
+				background-repeat: no-repeat;
+				background-position: 20px 20px;
+			}
+		</style>
 
 		<!-- Printing and PDF exports -->
 		<script>
@@ -25,8 +35,252 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
+				<section data-markdown>
+					<textarea data-template>
+						## Hello there, developer!
+
+						*Start by pressing right arrow*
+
+						<!--<img style="background: none; border: none;" data-src="https://cdn2.hubspot.net/hubfs/5147418/demos/giosg-partymode.png">-->
+					</textarea>
+				</section>
+
+				<section data-markdown>
+					<textarea data-template>
+						Welcome to Giosg backend coding assignment.
+
+						Goal of this assignment is to give us better picture of your skills and also
+						possibility for you to showcase your talent!
+
+						Completing this assignment will usually take anywhere from 2 hours to 6 hours depending on your skill level.
+					</textarea>
+				</section>
+
+				<section data-markdown>
+					<textarea data-template>
+						## Lets get started!
+					</textarea>
+				</section>
+
+				<section data-markdown>
+					<textarea data-template>
+						## Customer training event
+
+						Giosg customer success team is organizing event for our customers. Event will have trainings, work shops and of course good food and drinks.
+
+						Our amazing HR lady Jenni was tasked to get food and drinks for the event.
+
+						As Jenni is new and does not have a clue how much she should get each flavor we need to help her!
+					</textarea>
+				</section>
+
+				<section data-markdown>
+					<textarea data-template>
+						To make the event successfull we need to use our data from previous events to estimate how much she needs to purchase each flavor.
+
+						For this reason you need to build a web application to aggregate and display the data from previous events.
+					</textarea>
+				</section>
+
+				<section>
+					<section data-markdown>
+						<textarea data-template>
+							# Specs
+
+							*Scroll through all requirements by pressing down arrow. After that you can continue by pressing right arrow.*
+						</textarea>
+					</section>
+
+					<section data-markdown>
+						<textarea data-template>
+							## Main requirements
+
+							* Web app should be done using Django framework
+							* App should have login page. All other pages and APIs should be accessible only when logged in.
+							* App should have "results" -page and 2 RESTfull APIs for fetching data.
+							* App should have API endpoints for `/summary` and `/statistics`.
+						</textarea>
+					</section>
+
+					<section data-markdown>
+						<textarea data-template>
+							## Login page
+
+							* Login page should allow user to login using Django's standard authentication system
+							* No need for password reset or other fancy stuff
+							* After successfull login, user should be redirected to results page
+						</textarea>
+					</section>
+
+					<section data-markdown>
+						<textarea data-template>
+							## Results page
+
+							* Page should have inputs for start date, end date and a submit button.
+							* Clicking submit button should query your API (with ajax) which in turn should fetch data from Giosg API.
+							* When request completes, results should get rendered to screen.
+						</textarea>
+					</section>
+
+					<section data-markdown>
+						<textarea data-template>
+							## Data on results page
+
+							* On top of page there should be boxes for "Food", "Non-alcoholic drinks" and "Alcoholic drinks".
+								* These boxes should show total number of food items, total number of non-alcoholic drinks and alcoholic drinks consumed.
+							* On bottom of the page there should be table for displaying all data points returned from Giosg API.
+								* There should be columns: Date, Category, Event name, Item name and quantity.
+						</textarea>
+					</section>
+
+					<section data-markdown>
+						<textarea data-template>
+							## Results page layout
+							This is how results page could look like. Your app does not need to look exactly like this!
+							<img style="background: none; border: none; max-width: 600px; max-height: 400px;" data-src="./img/giosg_backend_assignment.png">
+						</textarea>
+					</section>
+
+					<section data-markdown>
+						<textarea data-template>
+							## REST API endpoints
+
+							* Your app should have `/summary` and `/statistics` API
+							* When querying these APIs, request to Giosg API should be made and data fetched.
+							* Both APIs should take start date and end date as parameters.
+						</textarea>
+					</section>
+
+					<section data-markdown>
+						<textarea data-template>
+							## Querying Giosg API
+
+							* API url is: https://api.giosg.com/api/events/v1/orgs/6fb6381a-4fdc-4c62-8678-ca8388d5d05e/fetch
+
+							* You need to use header for authentication.
+							```
+							Authorization: Token <token here>
+							```
+						</textarea>
+					</section>
+
+					<section data-markdown>
+						<textarea data-template>
+							## Querying Giosg API
+
+							* API url is: https://api.giosg.com/api/events/v1/orgs/6fb6381a-4fdc-4c62-8678-ca8388d5d05e/fetch
+
+							* You need to use header for authentication.
+							```
+							Authorization: Token <token here>
+							```
+							* Request should be `POST` with following content:
+							```json
+							{
+								"sources": [
+									"untrusted"
+								],
+								"interval": {
+									"start": "2020-02-17T21:28:56.865Z",
+									"end": "2020-02-20T23:28:56.865Z"
+								},
+								"granularity": "day",
+								"group_by": [
+									"category",
+									"action",
+									"label"
+								],
+								"organization_id": "6fb6381a-4fdc-4c62-8678-ca8388d5d05e",
+								"vendor": "com.giosg.journalist",
+								"aggregations": [
+									"sum"
+								],
+								"filters": {}
+							}
+							```
+						</textarea>
+					</section>
+
+					<section data-markdown>
+						<textarea data-template>
+							## Summary API
+
+							* Your app should have `/summary` API which should return total sum of food items, soft drinks and alcoholic bewerages consumed in the queried time range.
+								```json
+								{
+									"food": 456,
+									"soft_drinks": 868,
+									"alcholic_drinks": 12
+								}
+								```
+						</textarea>
+					</section>
+
+
+					<section data-markdown>
+						<textarea data-template>
+							## Statistics API
+
+							* Your app should have `/statistics` API which should return all data points returned by Giosg API.
+								```json
+								[
+									{
+										"date": "2020-02-20T22:08:58.897Z",
+										"category": "Soft drinks",
+										"event_name": "Training event",
+										"item": "Coca-Cola",
+										"quantity": 9053
+									}, {
+										"date": "2020-02-20T22:08:58.897Z",
+										"category": "Food",
+										"event_name": "Training event",
+										"item": "Salami Pizza",
+										"quantity": 234
+									}
+								]
+								```
+						</textarea>
+					</section>
+
+
+					<section data-markdown>
+						<textarea data-template>
+							## Bonus points and things to consider
+
+							* Secrets management
+							* Great documentation on how to run and build/install if needed. :)
+							* Something other cool that was not mentioned here! :)
+							* Remember to not commit any access tokens to repository!
+						</textarea>
+					</section>
+				</section>
+
+				<section data-markdown>
+					<textarea data-template>
+						## Questions?
+
+						If you have any questions don't hesitate to ask! We are happy to help.
+
+						You can reach us by mail at <a href="mailto:seniordev@giosg.com">seniordev@giosg.com</a> or come to our website
+						<a target="_blank" href="https://giosg.com">giosg.com</a> and have a online chat with us! 💬
+					</textarea>
+				</section>
+
+				<section data-markdown>
+					<textarea data-template>
+						## Returning this assignment
+
+						You can send link to your master piece with email to <a href="mailto:seniordev@giosg.com">seniordev@giosg.com</a>.
+
+						<a href="https://github.com">Github</a> or <a href="https://gitlab.com">Gitlab</a> repo link is preferred.
+					</textarea>
+				</section>
+
+				<section>
+					<h2>Happy coding!</h2>
+					<p>Hope we hear from you soon! :)</p>
+					<img style="background: none; border: none; max-width: 600px; max-height: 400px;" data-src="./img/happycoding.jpeg">
+				</section>
 			</div>
 		</div>
 
